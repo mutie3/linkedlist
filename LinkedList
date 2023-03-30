@@ -1,0 +1,275 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct nod{
+   int data;
+   nod *link;  };
+
+nod *head,*last,*cur,*temp;
+
+void create(int n){
+head=new nod;
+cur=head;
+for(int i=2;i<=n;i++)
+   { cur->link=new nod;
+     cur=cur->link;   }
+
+   last=cur;
+   last->link=NULL;
+
+}
+
+
+void read(){
+ cur=head;
+ while(cur){
+         cout<<"Enter element : ";
+         cin>>cur->data;
+         cur=cur->link;
+
+            }
+
+}
+
+
+
+void print(){
+ cout<<endl;
+ cur=head;
+while(cur)  //   cur !=NULL
+ {  cout<<cur->data<<'\t';
+    cur=cur->link;
+
+      }
+
+
+}
+
+
+void Addfirst(int m){
+
+temp=new nod;
+temp->data=m;
+
+temp->link=head;
+head=temp;
+
+
+}
+
+void Addlast(int m){
+
+temp=new nod;
+temp->data=m;
+
+last->link=temp;
+last=temp;
+last->link=NULL;
+
+}
+
+void Addany(int m){
+
+temp=new nod;
+temp->data=m;
+
+cur=head;
+while(cur->link->data  <m)
+   cur=cur->link;
+
+temp->link=cur->link;
+cur->link=temp;
+
+
+}
+
+void Delfirst(){
+cur=head->link;
+delete head;
+head=cur;
+}
+
+
+void Dellast(){
+cur=head;
+while(cur->link !=last)
+  cur=cur->link;
+delete last;
+last=cur;
+last->link=NULL;
+}
+
+void Delany(int m)
+{
+
+cur=head;
+while(cur->link->data !=m)
+  cur=cur->link;
+
+temp=cur->link;
+cur->link=temp->link;
+delete temp;
+
+
+}
+
+void Destroy() {
+   cur = head;
+   while (cur != NULL) {
+      temp = cur;
+      cur = cur->link;
+      delete temp;
+   }
+   head = NULL;
+}
+
+
+
+
+
+main(){
+int c,m;
+head=NULL;
+ss:
+clrscr();
+cout<<"Choose number :\n";
+cout<<"1: Create \n";
+cout<<"2: Read \n";
+cout<<"3: Print \n";
+cout<<"4: Addfirst \n";
+cout<<"5: Addlast \n";
+cout<<"6: Addany \n";
+cout<<"7: Delfirst \n";
+cout<<"8: Dellast \n";
+cout<<"9: Delany \n";
+cout<<"0: Destroy \n";
+cin>>c;
+switch(c){
+
+ case 1:{ if(!head) {
+          int n;
+          cout<<"How many element :";
+          cin>>n;
+          create(n);
+          cout<<"\nDone.....";
+               }
+         else
+            cout<<"\nLinked List already created";
+
+          getch();
+          goto ss;          }
+
+
+ case 2: { if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           read();
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+
+ case 3:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           print();
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+ case 4:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           cout<<"Enter element :";
+           cin>>m;
+           Addfirst(m);
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+ case 5:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           cout<<"Enter element :";
+           cin>>m;
+           Addlast(m);
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+ case 6:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           cout<<"Enter element :";
+           cin>>m;
+           Addany(m);
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+ case 7:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+          Delfirst();
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+
+case 8:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+          Dellast();
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+
+case 9:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           cout<<"Enter what to delete : ";
+           cin>>m;
+          Delany(m);
+           cout<<"\nDone.....";
+           getch();
+           goto ss;
+                            }
+case 0:   {
+             if(!head) {cout<<"No Linked List !!!";
+                      getch();
+                      goto ss; }
+           Destroy();
+           head = NULL;
+           cout<<"\nLinked List destroyed.....";
+           getch();
+           goto ss;
+                            }
+
+
+ default: { cout<<"\nwrong entry !!!";
+           getch();
+           goto ss;
+                   }
+
+                 }
+
+
+
+
+
+                                       }
